@@ -151,7 +151,9 @@ webpackConfig = {
 			}
 		}),
 
-		new webpack.DefinePlugin({ // Used to define windows variables
+		// Used to define windows variables
+		new webpack.DefinePlugin({
+			'__DEVTOOLS__': true,
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 		}),
 
