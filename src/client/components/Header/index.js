@@ -1,6 +1,9 @@
 
 /**
- *
+ * @file Header component
+ * @author Enrique Tamames
+ * @module components/Header
+ * @version 0.0.1
  */
 
 import React from 'react'

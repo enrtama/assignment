@@ -1,6 +1,10 @@
+// @flow
 
 /**
- *
+ * @file Company logo
+ * @author Enrique Tamames
+ * @module components/Logo
+ * @version 0.0.1
  */
 
 import React from 'react'

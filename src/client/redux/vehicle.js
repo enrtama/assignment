@@ -17,14 +17,16 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE = Immutable({
-  vehicle: []
+  vehicle: [],
+  currentCoordinate: null
 })
 
 /* ------------- Reducers ------------- */
 
 export const addInfoVehicle = (state, {vehicle}) => {
   return state.merge(Immutable({
-    vehicle: state.vehicle.concat(vehicle)
+    vehicle: state.vehicle.concat(vehicle),
+    currentCoordinate: [parseFloat(vehicle.gps[0]), parseFloat(vehicle.gps[1])]
   }))
 }
 

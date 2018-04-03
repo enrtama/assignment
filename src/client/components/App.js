@@ -1,6 +1,9 @@
 
 /**
- *
+ * @file Entry point for the application
+ * @author Enrique Tamames
+ * @module App
+ * @version 0.0.1
  */
 
 import React, { Component } from 'react'
@@ -9,24 +12,22 @@ import { connect } from 'react-redux'
 import Header from './Header'
 import LogoComponent from './Logo'
 import LiveDataLogComponent from './LiveDataLog'
+import Map from './Map'
+import Sidebar from './Sidebar'
 
 import VehicleActions from '../redux/vehicle'
 
-class App extends Component {
-	state = {
-		logs: []
-	}
+export class App extends Component {
 
 	/**
 	 * componentDidMount - description
 	 *
 	 * @return {type}  description
 	 */
-	componentDidMount() {
+	componentDidMount = () => {
 		// Save data in state on data event
 		this.props.socket.on('state', (state) => {
 			this.props.addInfoVehicle(state)
-			this.setState({ logs: this.state.logs.concat([state]) })
 		})
 	}
 
@@ -35,16 +36,12 @@ class App extends Component {
 	 *
 	 * @return {type}  description
 	 */
-	render() {
+	render = () => {
+		const { vehicle, currentCoordinate } = this.props
 		return (
 			<section>
-				<article id='app-container'>
-					<Header />
-					<LogoComponent />
-				</article>
-				<article id='log-container'>
-					<LiveDataLogComponent logs={ this.state.logs } />
-				</article>
+				<Sidebar vehicle={vehicle[vehicle.length - 1]} />
+				<Map currentCoordinate={currentCoordinate}/>
 			</section>
 		)
 	}
@@ -52,7 +49,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vehicle: state.vehicle
+    vehicle: state.vehicle.vehicle,
+		currentCoordinate: state.vehicle.currentCoordinate
   }
 }
 
