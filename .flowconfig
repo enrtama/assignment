@@ -1,0 +1,18 @@
+[ignore]
+
+; Ignore node_modules
+.*/node_modules/.*
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+
+[strict]
+
+[version]
+^0.69.0

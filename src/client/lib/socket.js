@@ -1,3 +1,11 @@
+
+/**
+ * @file socket.io
+ * @author Enrique Tamames
+ * @module lib/socket
+ * @version 0.0.1
+ */
+
 import io from "socket.io-client"
 
 console.log('Connecting to', window.location.href)

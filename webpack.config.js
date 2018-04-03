@@ -48,7 +48,8 @@ const cssLoaderOptions = {
 webpackConfig = {
 	resolve: {
 		alias: {
-			styles: path.resolve(__dirname, 'src/client/styles')
+			styles: path.resolve(__dirname, 'src/client/styles'),
+			assets: path.resolve(__dirname, 'assets')
 		}
 	},
 
@@ -132,7 +133,6 @@ webpackConfig = {
 			}
 		]
 	},
-
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.NamedModulesPlugin(),
