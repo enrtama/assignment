@@ -75,7 +75,6 @@ webpackConfig = {
 				use: ['babel-loader'],
 				exclude: /node_modules/
 			},
-
 			{
 				test: /\.less$/,
 				use: extractLess.extract({
@@ -89,11 +88,9 @@ webpackConfig = {
 							]
 						}
 					}],
-
 					fallback: "style-loader",
 				})
 			},
-
 			{
 				test: /\.css$/,
 				use: !(__DEV__)
@@ -106,12 +103,10 @@ webpackConfig = {
 					})
 					: [ 'style-loader', 'css-loader' ]
 			},
-
 			{
 				test: /\.styl$/,
 				loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
 			},
-
 			{
 				test: /\.(jpe?g|png|gif)$/,
 				use: [
@@ -122,13 +117,20 @@ webpackConfig = {
 					'image-webpack-loader'
 				]
 			},
-
 			{
 				test: /\.(ttf|eot|woff|woff2|svg)$/,
 				loader: 'file-loader',
 				options: {
 					name: 'fonts/[name].[ext]',
 					limit: 40000
+				}
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: "eslint-loader",
+				options: {
+					// eslint options (if necessary)
 				}
 			}
 		]
