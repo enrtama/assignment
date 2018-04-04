@@ -18,7 +18,8 @@ export const PARAMETERS = {
 export const CHARTS_TITLE = {
   TIME_ENERGY: 'Energy (kWh) over time',
   TIME_ODO: 'Distance (km) over time',
-  TIME_SOC: 'Battery state (%)'
+  TIME_SOC: 'Battery state (%)',
+  TIME_ENERGY_SPEED: 'Energy (kWh) & Speed (km/h) over time',
 }
 
 export const MAX_ELEMENTS = 20;

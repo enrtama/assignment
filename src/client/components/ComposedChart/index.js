@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
+import { ComposedChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 import { MAX_ELEMENTS, PARAMETERS } from '../../constants'
 import { getTimeKey } from '../../utils'
 
@@ -29,19 +29,9 @@ export default class AreaChartComponent extends React.Component {
       let newData = {}
       newData[parameters[0]] = parameters[0] === PARAMETERS.TIME ? getTimeKey(vehicle.time) : vehicle[parameters[0]]
       newData[parameters[1]] = vehicle[parameters[1]] || 0
+      newData[parameters[2]] = vehicle[parameters[2]] || 0
       this.setState({dataChart: [...dataChart, newData].slice(-MAX_ELEMENTS)})
     }
-  }
-
-  /**
-   * toPercent - description
-   *
-   * @param  {type} decimal   description
-   * @param  {type} fixed = 0 description
-   * @return {type}           description
-   */
-  toPercent = (decimal, fixed = 0) => {
-    return `${(decimal).toFixed(fixed)}%`;
   }
 
   /**
@@ -53,20 +43,24 @@ export default class AreaChartComponent extends React.Component {
     const { dataChart } = this.state
     const { title, parameters } = this.props
 
+    console.log(dataChart);
+
     return (
       <div>
         <h3>{title}</h3>
-        <AreaChart width={600} height={300} data={dataChart}
+        <ComposedChart width={600} height={300} data={dataChart}
               margin={{top: 5, right: 5, left: 5, bottom: 5}}>
           <XAxis dataKey={parameters[0]} allowDuplicatedCategory={false}>
             <Label value={parameters[0]} position="bottom" offset={0} />
           </XAxis>
-          <YAxis tickFormatter={this.toPercent}/>
+          <YAxis />
           <CartesianGrid strokeDasharray="3 3"/>
           <Tooltip/>
-          <Legend verticalAlign="top"/>
+          <Legend verticalAlign="top" height={36}/>
           <Area type="monotone" dataKey={parameters[1]} stroke="#8884d8" fill="#8884d8" />
-        </AreaChart>
+          <Line type="monotone" dataKey={parameters[2]} stroke='#ff7300'/>
+          <Bar dataKey={parameters[2]} barSize={20} fill='#413ea0' />
+        </ComposedChart>
       </div>
     )
   }
