@@ -10,6 +10,7 @@
 import React from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import Leaflet from 'leaflet'
+import Tooltip from './Tooltip'
 
 const MarkerImage = new Leaflet.Icon({
   iconUrl: require('../../../../assets/marker.png'),
@@ -52,9 +53,7 @@ export default class MapComponent extends React.Component<Props, State> {
         />
         <Marker position={coordinates} icon={MarkerImage}>
           <Popup>
-            <span>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </span>
+            <Tooltip />
           </Popup>
         </Marker>
       </Map>
