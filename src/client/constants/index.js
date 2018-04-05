@@ -12,14 +12,27 @@ export const PARAMETERS = {
   GPS: 'gps',
   ODO: 'odo',
   SPEED: 'speed',
-  SOC: 'soc'
+  SOC: 'soc',
+  TEMPERATURE: 'temperature',
+  PASSENGERS: 'passengers',
+  NO_PARAM: null
 }
 
-export const CHARTS_TITLE = {
+export const CHART_TITLE = {
   TIME_ENERGY: 'Energy (kWh) over time',
   TIME_ODO: 'Distance (km) over time',
   TIME_SOC: 'Battery state (%)',
   TIME_ENERGY_SPEED: 'Energy (kWh) & Speed (km/h) over time',
+  ENERGY_PASSENGERS: 'Energy spent depending on passengers'
+}
+
+export const CHART_TYPE = {
+  LINE: 'Line',
+  BAR: 'Bar',
+  AREA: 'Area',
+  COMPOSED: 'Composed',
+  RADIAL: 'Radial',
+  PIE: 'Pie'
 }
 
 export const MAX_ELEMENTS = 20;
@@ -43,7 +56,7 @@ export const SIDEBAR_STYLES = {
      background: '#bdc3c7'
    },
    bmMenu: {
-     background: '#373a47',
+     background: '#f9f9f9',
      padding: '2.5em 1.5em 0',
      fontSize: '1.15em'
    },
@@ -51,7 +64,7 @@ export const SIDEBAR_STYLES = {
      fill: '#373a47'
    },
    bmItemList: {
-     color: '#b8b7ad',
+     color: '#777777',
      padding: '0.8em'
    },
    bmOverlay: {
