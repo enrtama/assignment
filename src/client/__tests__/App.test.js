@@ -6,13 +6,27 @@
  * @version 0.0.1
  */
 
-import React from 'react';
-import { App } from '../components/App';
+import React from 'react'
+import { App } from '../components/App'
+import Sidebar from '../components/Sidebar'
+import Map from '../components/Map'
+import { shallow } from 'enzyme'
+import { Server } from 'mock-socket'
+import sinon from 'sinon'
+import { vehicle, currentCoordinate } from '../__mocks__/mockupData'
 
-import renderer from 'react-test-renderer';
+const socket = new Server('ws://localhost:1337');
 
-it('test true equals true', () => {
-  // const rendered = renderer.create(<App />).toJSON();
-  // expect(rendered).toBeTruthy();
-  expect(true).toBe(true);
+describe('<App />', () => {
+  it('should render <App />', () => {
+    const props = {
+      vehicle: vehicle,
+      currentCoordinate: currentCoordinate,
+      socket: socket,
+      addInfoVehicle: sinon.spy()
+    }
+    const wrapper = shallow(<App vehicle={vehicle} currentCoordinate={currentCoordinate} socket={socket}/>)
+    expect(wrapper.find(Sidebar)).toBeDefined()
+    expect(wrapper.find(Map)).toBeDefined()
+  });
 });

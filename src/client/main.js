@@ -1,7 +1,10 @@
 
 /**
-*
-*/
+ * @file Main
+ * @author Enrique Tamames
+ * @module Main
+ * @version 0.0.1
+ */
 
 import React from 'react'
 import ReactDOM from 'react-dom'
