@@ -1,3 +1,14 @@
+# Features
+
+1. Redux as a state container
+1. Testing: Jest && Enzyme
+2. Type checker: Flow.js
+3. Map: [Leaflet.js](https://github.com/PaulLeCam/react-leaflet)
+4. Charts: [Recharts](http://recharts.org/)
+5. CSS: [BEM convention](http://getbem.com/)
+6. Code Documentation: [JSDocs](http://usejsdoc.org/)
+7. Progressive Web App: `yarn build` (service-worker.js, manifest.json)
+
 # ViriCiti Example App
 This repository holds the ViriCiti Example App starter kit.
 
@@ -27,7 +38,7 @@ Run the project
 `npm start`
 
 Finally, open up your browser at
-<a href='http://localhost:1337'>http://localhost:1337</a>
+[http://localhost:1337](http://localhost:1337)
 
 
 ## The Assignment
@@ -78,6 +89,7 @@ Your app needs to at least:
 
 #### Front-end - Up for more?
 Cool! You could extend the app's functionality by:
+
 * Enrich the data-set with different data sources (e.g. weather API)
 * Optimize page loading (performance)
 * Global state management, like using Redux.js
@@ -87,26 +99,32 @@ Cool! You could extend the app's functionality by:
 ### Back-end based assignment
 You choose to leave the client-side JS app in the example application as it is and concentrate on the back-end. Awesome!
 
-In the example application you will find a **Vehicle** data generator in `src/server/lib/Vehicle.js`. This generator is part of a node HTTP server. Now, it is your task to create a separate service for this generator, so that, potentially, more services could make use of it. The image below depicts the current situation and the preferred situation.
+In the example application you will find a **Vehicle** data generator in `src/server/lib/Vehicle.js`. This generator is part of a node HTTP server. Now, it is your task to create a separate service for this generator, so potentially more services could make use of it. The image below depicts the current situation and the preferred situation.
 
 ![Architecture before and after](images/architecture.png)
 
-Move the data generator from `src/server/lib/vehicle.js`, which is now a node module included in the HTTP server, to another process: a TCP server. For the HTTP server to keep receiving the vehicle data, it needs to connect to  (as a TCP client) this new TCP server that is running the _vehicle data generator_. To make it a bit more interesting, the port on the TCP server should be an arbitrary port, so you will need to make use of some sort of service discovery. i.e. [Consul](www.consul.io) may be a good choice, but [etcd](https://coreos.com/etcd/) is interesting too.
+Move the data generator from `src/server/lib/vehicle.js`, which is now a node module included in the HTTP server, to another process based on a TCP server. For the HTTP server to keep receiving the vehicle data, it needs to connect (as a TCP client) to this new TCP server that is running the _vehicle data generator_. To make it a bit more interesting, the port on the TCP server should be an arbitrary port, so you will need to make use of some sort of service discovery. i.e. [Consul](www.consul.io) may be a good choice, but [etcd](https://coreos.com/etcd/) is interesting too.
 
 #### Back-end - Requirements
-* Your modified back-end needs three services, a HTTP server, a TCP server and the (third-party) service discovery service.
+* Your modified back-end needs three services, a HTTP server (consuming the data), a TCP server (production the data) and the (third-party) service discovery service
 * The TCP server registers its port in the service discovery
 * The TCP server generates the vehicle data and streams it over a TCP connection
 * The HTTP server, hosting the web client, connects to this TCP server and receives its data
+* Make the HTTP server reconnect with the TCP server after the connection is dropped (implement a reconnection strategy)
+* Run more vehicles by increasing the number of instances of your Vehicle Data Generator service (and stream them to the HTTP server)
+* Allow multiple HTTP servers to connect to your vehicle TCP server(s)
 
 #### Back-end - Up for more?
 Nice! Now that is working and if you still have some energy (and time ;) ) left, how about:
-* make the HTTP server reconnect with the TCP server after the connection is dropped (implement a reconnection strategy)
-* allow multiple HTTP servers to connect to you TCP server
-*  putting your servers into docker images
-* improve the Vehicle.js module! (it lacks re-reading it's source file after reading through it)
 
-## The project structure
+* Improve the Vehicle.js module! (it lacks re-reading it's source file after reading through it all)
+* Dockerize all your services
+
+Still some time left?
+
+* Add some data-visualisation in the front-end part to actually see these vehicles drive on a map using the GPS location
+
+## The project file structure
 The project structure is pretty straight forward. Below you can find some of the things you might be looking for.
 
 ### Node.js and Express server
@@ -139,9 +157,9 @@ Looking to level up your knowledge and skills? These are some good articles/cour
 
 ### Back-end
 
-* [Node Streams API](https://nodejs.org/api/stream.html)
-* [Streams & Back-pressure](https://www.transitions-now.com/2015/12/06/merging-time-series-data-streams-a-node-js-streams-case-part-2/)
-* [TCP node server](https://nodejs.org/api/net.html)
+* [Node.js Streams API](https://nodejs.org/api/stream.html)
+* [Readable Streams & Back-pressure](https://www.transitions-now.com/2015/12/06/merging-time-series-data-streams-a-node-js-streams-case-part-2/)
+* [Node.js TCP server](https://nodejs.org/api/net.html)
 * [Service Registry with consul](https://www.consul.io/) or [etcd](https://coreos.com/etcd/)
 * [Docker](https://www.docker.com/)
 
