@@ -15,6 +15,8 @@ import App from './components/App'
 import { Provider } from 'react-redux'
 import store from './redux/store';
 
+import registerServiceWorker from './pwa/registerServiceWorker';
+
 import 'react-hot-loader/patch'
 import './styles/app.less'
 
@@ -28,6 +30,8 @@ const render = () => {
     document.getElementById('root')
   )
 }
+
+registerServiceWorker();  // Runs register() as default function
 
 socket.once('ready', () => {
   console.log('Socket ready')

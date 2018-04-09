@@ -1,188 +1,224 @@
+
+/**
+ * @file Webpack configuration file
+ * @author Enrique Tamames Sobrino
+ * @module webpackConfig
+ * @version 0.0.1
+ */
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanCSSPlugin    = require('less-plugin-clean-css')
-const webpack           = require('webpack')
-const path              = require('path')
+const CleanCSSPlugin = require('less-plugin-clean-css')
+const webpack = require('webpack')
+const path = require('path')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const __DEV__ = (process.env.NODE_ENV !== 'production')
 console.log(`Compiling in ${process.env.NODE_ENV || 'development'} mode`)
 
 const VENDOR_LIBS = [
-	'react',
-	'react-dom',
+  'react',
+  'react-dom',
 ]
 
 const APP_ENTRY = './src/client/main.js'
 
 // ExtractTextPlugin config
 const extractLess = new ExtractTextPlugin({
-		filename: (__DEV__) ? "[name].css" : "[name].[contenthash].css",
-		disable: __DEV__
+    filename: (__DEV__) ? "[name].css" : "[name].[contenthash].css",
+    disable: __DEV__
 })
 
 // Css loader options
 const cssLoaderOptions = {
-	sourceMap: true,
+  sourceMap: true,
 
-	minimize: {
-		autoprefixer: {
-			add: true,
-			remove: true,
-			browsers: ['last 2 versions'],
-		},
+  minimize: {
+    autoprefixer: {
+      add: true,
+      remove: true,
+      browsers: ['last 2 versions'],
+    },
 
-		discardComments: {
-			removeAll : true,
-		},
+    discardComments: {
+      removeAll : true,
+    },
 
-		discardUnused: false,
-		mergeIdents: false,
-		reduceIdents: false,
-		safe: true,
-		sourcemap: true
-	}
+    discardUnused: false,
+    mergeIdents: false,
+    reduceIdents: false,
+    safe: true,
+    sourcemap: true
+  }
 }
 
 // Webpack configuration
 webpackConfig = {
-	resolve: {
-		alias: {
-			styles: path.resolve(__dirname, 'src/client/styles'),
-			assets: path.resolve(__dirname, 'assets')
-		}
-	},
+  resolve: {
+    alias: {
+      styles: path.resolve(__dirname, 'src/client/styles'),
+      assets: path.resolve(__dirname, 'assets')
+    }
+  },
 
-	devtool: (__DEV__) ? "eval" : "cheap-module-source-map",
+  devtool: (__DEV__) ? "eval" : "cheap-module-source-map",
 
-	entry: {
-		bundle : (__DEV__)
-			? [APP_ENTRY].concat('webpack-hot-middleware/client?path=/__webpack_hmr')
-			: [APP_ENTRY],
-		vendor: VENDOR_LIBS
-	},
+  entry: {
+    bundle : (__DEV__)
+      ? [APP_ENTRY].concat('webpack-hot-middleware/client?path=/__webpack_hmr')
+      : [APP_ENTRY],
+    vendor: VENDOR_LIBS
+  },
 
-	output: {
-		path: path.join(__dirname, 'dist/client'),
-		filename: (__DEV__) ? "[name].js" : "[name].[chunkhash].js",
-		chunkFilename: (__DEV__) ? "[name].js" : "[name].[chunkhash].js"
-	},
+  output: {
+    path: path.join(__dirname, 'dist/client'),
+    filename: (__DEV__) ? "[name].js" : "[name].[chunkhash].js",
+    chunkFilename: (__DEV__) ? "[name].js" : "[name].[chunkhash].js"
+  },
 
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				use: ['babel-loader'],
-				exclude: /node_modules/
-			},
-			{
-				test: /\.less$/,
-				use: extractLess.extract({
-					use: [{
-						loader: 'css-loader', options: cssLoaderOptions
-					}, {
-						loader: 'less-loader', options: {
-							sourceMap: true,
-							plugins: [
-								new CleanCSSPlugin({ advanced: true })
-							]
-						}
-					}],
-					fallback: "style-loader",
-				})
-			},
-			{
-				test: /\.css$/,
-				use: !(__DEV__)
-					? ExtractTextPlugin.extract({
-						fallback: 'style-loader',
-						use: [{
-							loader: 'css-loader',
-							options: cssLoaderOptions
-						}]
-					})
-					: [ 'style-loader', 'css-loader' ]
-			},
-			{
-				test: /\.styl$/,
-				loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
-			},
-			{
-				test: /\.(jpe?g|png|gif)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: { limit: 40000 }
-					},
-					'image-webpack-loader'
-				]
-			},
-			{
-				test: /\.(ttf|eot|woff|woff2|svg)$/,
-				loader: 'file-loader',
-				options: {
-					name: 'fonts/[name].[ext]',
-					limit: 40000
-				}
-			},
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: "eslint-loader",
-				options: {
-					// eslint options (if necessary)
-				}
-			}
-		]
-	},
-	plugins: [
-		new webpack.NoEmitOnErrorsPlugin(),
-		new webpack.NamedModulesPlugin(),
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.less$/,
+        use: extractLess.extract({
+          use: [{
+            loader: 'css-loader', options: cssLoaderOptions
+          }, {
+            loader: 'less-loader', options: {
+              sourceMap: true,
+              plugins: [
+                new CleanCSSPlugin({ advanced: true })
+              ]
+            }
+          }],
+          fallback: "style-loader",
+        })
+      },
+      {
+        test: /\.css$/,
+        use: !(__DEV__)
+          ? ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [{
+              loader: 'css-loader',
+              options: cssLoaderOptions
+            }]
+          })
+          : [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.styl$/,
+        loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 40000 }
+          },
+          'image-webpack-loader'
+        ]
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          limit: 40000
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+        options: {
+          // eslint options (if necessary)
+        }
+      }
+    ]
+  },
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
 
-		new CopyWebpackPlugin([{ from: 'assets/'}]),
+    new CopyWebpackPlugin([{ from: 'assets/'}, { from: 'src/client/pwa/' }]),
 
-		new webpack.optimize.CommonsChunkPlugin({ // add duplicate modules only to the vendor.js bundle
-			names: ['vendor', 'manifest']
-		}),
+    new webpack.optimize.CommonsChunkPlugin({ // add duplicate modules only to the vendor.js bundle
+      names: ['vendor', 'manifest']
+    }),
 
-		new HtmlWebpackPlugin({
-			template: 'src/client/index.html',
-			filename: 'index.html',
-			minify: {
-				collapseWhitespace: true
-			}
-		}),
+    new HtmlWebpackPlugin({
+      template: 'src/client/index.html',
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
 
-		// Used to define windows variables
-		new webpack.DefinePlugin({
-			'__DEVTOOLS__': true,
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-		}),
+    // Used to define windows variables
+    new webpack.DefinePlugin({
+      '__DEVTOOLS__': true,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
 
-		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: true,
-			comments: false,
-			compress: {
-				warnings: false,
-				screw_ie8: true,
-				conditionals: true,
-				unused: true,
-				comparisons: true,
-				sequences: true,
-				dead_code: true,
-				evaluate: true,
-				if_return: true,
-				join_vars: true,
-			},
-		}),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false,
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true,
+      },
+    }),
 
-		extractLess
-		// new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()
-	]
+    /* The basic is very easy, just define the file name and
+     * it's gonna be created in the public folder along with the assets
+     */
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json', // Not to confuse with manifest.json
+    }),
+
+    new SWPrecacheWebpackPlugin({
+      // By default, a cache-busting query parameter is appended to requests
+      // used to populate the caches, to ensure the responses are fresh.
+      // If a URL is already hashed by Webpack, then there is no concern
+      // about it being stale, and the cache-busting can be skipped.
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        if (message.indexOf('Total precache size is') === 0) {
+          // This message occurs for every build and is a bit too noisy.
+          return;
+        }
+        console.log(message);
+      },
+      minify: true, // minify and uglify the script
+      navigateFallback: '/index.html',
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
+
+    extractLess
+    // new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()
+  ]
 }
 
 // Add HMR if in development mode
 if (__DEV__)
-	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 
 module.exports = webpackConfig
