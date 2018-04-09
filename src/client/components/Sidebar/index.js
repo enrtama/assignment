@@ -38,8 +38,10 @@ export default class Sidebar extends React.Component<Props> {
       <Menu pageWrapId={"page-wrap"} disableCloseOnEsc noOverlay right styles={SIDEBAR_STYLES}>
         <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.ENERGY, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_ENERGY} />
         <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.ODO, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_ODO} />
-        <Chart chartType={CHART_TYPE.COMPOSED} parameters={[PARAMETERS.TIME, PARAMETERS.ENERGY, PARAMETERS.SPEED]} vehicle={vehicle} title={CHART_TITLE.TIME_ENERGY_SPEED} />
+        <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.ENERGY, PARAMETERS.SPEED]} vehicle={vehicle} title={CHART_TITLE.TIME_ENERGY_SPEED} />
+        <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.SOC, PARAMETERS.SPEED]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC_SPEED} />
         <Chart chartType={CHART_TYPE.AREA} parameters={[PARAMETERS.TIME, PARAMETERS.SOC, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC} />
+        <Chart chartType={CHART_TYPE.PIE} parameters={[PARAMETERS.SOC, PARAMETERS.NO_PARAM, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC} />
       </Menu>
     )
   }

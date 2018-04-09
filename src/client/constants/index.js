@@ -23,6 +23,7 @@ export const CHART_TITLE = {
   TIME_ODO: 'Distance (km) over time',
   TIME_SOC: 'Battery state (%)',
   TIME_ENERGY_SPEED: 'Energy (kWh) & Speed (km/h) over time',
+  TIME_SOC_SPEED: 'Battery state & Speed (km/h) over time',
   ENERGY_PASSENGERS: 'Energy spent depending on passengers'
 }
 

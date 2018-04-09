@@ -1,3 +1,4 @@
+// @flow
 
 /**
  * @file Entry point for the application
@@ -17,7 +18,23 @@ import Sidebar from './Sidebar'
 
 import VehicleActions from '../redux/vehicle'
 
-export class App extends Component {
+type Vehicle = {
+  time: number,
+  energy: number,
+  gps: [string,string],
+  odo: number,
+  speed: number,
+  soc: number
+}
+
+type Props = {
+  socket: any,
+  addInfoVehicle: any,
+  currentCoordinate: [any,any],
+  vehicle: Array<Vehicle>
+}
+
+export class App extends Component<Props> {
 
   /**
    * componentDidMount - description
