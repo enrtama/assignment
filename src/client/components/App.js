@@ -41,7 +41,7 @@ export class App extends Component<Props> {
    *
    * @return {type}  description
    */
-  componentDidMount = () => {
+  componentDidMount() {
     // Save data in state on data event
     this.props.socket.on('state', (state) => {
       this.props.addInfoVehicle(state)

@@ -42,7 +42,7 @@ export default class Chart extends React.Component<Props,State> {
   *
   * @return {type}  description
   */
-  componentWillReceiveProps = (nextProps: Props) => {
+  componentWillReceiveProps(nextProps: Props) {
     const vehicle: Vehicle = nextProps.vehicle
     const parameters: [string,string, string] = nextProps.parameters
     const dataChart: any = this.state.dataChart

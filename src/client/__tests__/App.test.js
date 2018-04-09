@@ -20,28 +20,32 @@ const socket = new Server('ws://localhost:1337');
 
 describe('<App />', () => {
 
-  it('should render <Sidebar /> & <Map />', () => {
+  let wrapper;
+  beforeEach(() => {
     const props = {
       vehicle: vehicle,
       currentCoordinate: currentCoordinate,
       socket: socket,
       addInfoVehicle: sinon.spy()
     }
-    const wrapper = shallow(<App {...props}/>)
+    wrapper = shallow(<App {...props}/>)
+  })
+
+  it('should render <Sidebar /> & <Map />', () => {
     expect(wrapper.find(Sidebar)).toBeDefined()
     expect(wrapper.find(Map)).toBeDefined()
   })
 
-  // it('should call componentDidMount', () => {
-  //   const props = {
-  //     vehicle: vehicle,
-  //     currentCoordinate: currentCoordinate,
-  //     socket: socket,
-  //     addInfoVehicle: sinon.spy()
-  //   }
-  //   const wrapper = mount(<App vehicle={vehicle} currentCoordinate={currentCoordinate} socket={socket}/>)
-  //   // expect(spy).toHaveBeenCalledTimes(1);
-  //   expect(App.prototype.componentDidMount.calledOnce).toBeTruthy();
-  // })
+  it('should call componentDidMount', function () {
+    sinon.spy(App.prototype, 'componentDidMount');
+    const props = {
+      vehicle: vehicle,
+      currentCoordinate: currentCoordinate,
+      socket: socket,
+      addInfoVehicle: sinon.spy()
+    }
+    wrapper = shallow(<App {...props}/>)
+    expect(App.prototype.componentDidMount.calledOnce).toBe(true);
+  })
 
 })
