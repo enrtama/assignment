@@ -1,7 +1,7 @@
 //
 // Mockup data
 //
-// 
+//
 export const vehicle = [{
   energy: null,
   gps: ["52.09136199951172", "5.122323513031006"],
@@ -11,4 +11,4 @@ export const vehicle = [{
   time: 1522932571499
 }]
 
-export const currentCoordinate = ["52.09136199951172", "5.122323513031006"]
+export const currentCoordinate = [52.09136199951172, 5.122323513031006]
