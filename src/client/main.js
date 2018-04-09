@@ -1,7 +1,7 @@
 
 /**
  * @file Main
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module Main
  * @version 0.0.1
  */

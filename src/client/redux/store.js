@@ -1,5 +1,8 @@
 /**
- *
+ * @file Redux store
+ * @author Enrique Tamames Sobrino
+ * @module redux/store
+ * @version 0.0.1
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';

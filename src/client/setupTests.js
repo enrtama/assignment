@@ -1,7 +1,7 @@
 
 /**
  * @file Tests setup file
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module tests/setupTests
  * @version 0.0.1
  */

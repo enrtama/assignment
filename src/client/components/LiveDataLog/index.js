@@ -2,7 +2,7 @@
 
 /**
  * @file Live data log component
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module components/LiveDataLog
  * @version 0.0.1
  */
@@ -23,15 +23,15 @@ type Props = {
 }
 
 const LiveDataLog = (props: Props) => {
-	return (
-		<div>
-		  {
-				// Show data with newest object on top
-				props.logs.reverse().map((log) =>
-					<p key={log.time}>{ JSON.stringify(log) }</p>
-				)
-			}
-		</div>
+  return (
+    <div>
+      {
+        // Show data with newest object on top
+        props.logs.reverse().map((log) =>
+          <p key={log.time}>{ JSON.stringify(log) }</p>
+        )
+      }
+    </div>
   )
 }
 

@@ -2,7 +2,7 @@
 
 /**
  * @file Component that contains charts
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module components/Sidebar
  * @version 0.0.1
  */

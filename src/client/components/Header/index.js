@@ -2,7 +2,7 @@
 
 /**
  * @file Header component
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module components/Header
  * @version 0.0.1
  */

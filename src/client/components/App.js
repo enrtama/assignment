@@ -2,7 +2,7 @@
 
 /**
  * @file Entry point for the application
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module App
  * @version 0.0.1
  */

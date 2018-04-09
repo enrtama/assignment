@@ -2,7 +2,7 @@
 
 /**
  * @file Map component
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module components/Map
  * @version 0.0.1
  */

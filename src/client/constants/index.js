@@ -1,7 +1,7 @@
 
 /**
  * @file Constants
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module constants/
  * @version 0.0.1
  */

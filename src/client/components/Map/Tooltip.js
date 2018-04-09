@@ -2,7 +2,7 @@
 
 /**
 * @file Map tooltip
-* @author Enrique Tamames
+* @author Enrique Tamames Sobrino
 * @module components/Map/Tooltip
 * @version 0.0.1
 */
