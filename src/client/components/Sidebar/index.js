@@ -41,7 +41,8 @@ export default class Sidebar extends React.Component<Props> {
         <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.ENERGY, PARAMETERS.SPEED]} vehicle={vehicle} title={CHART_TITLE.TIME_ENERGY_SPEED} />
         <Chart chartType={CHART_TYPE.LINE} parameters={[PARAMETERS.TIME, PARAMETERS.SOC, PARAMETERS.SPEED]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC_SPEED} />
         <Chart chartType={CHART_TYPE.AREA} parameters={[PARAMETERS.TIME, PARAMETERS.SOC, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC} />
-        <Chart chartType={CHART_TYPE.PIE} parameters={[PARAMETERS.SOC, PARAMETERS.NO_PARAM, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.TIME_SOC} />
+        <Chart chartType={CHART_TYPE.BUBBLE} parameters={[PARAMETERS.TIME, PARAMETERS.TIME, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.EXAMPLE_BUBBLE} />
+        <Chart chartType={CHART_TYPE.RADAR} parameters={[PARAMETERS.TIME, PARAMETERS.TIME, PARAMETERS.NO_PARAM]} vehicle={vehicle} title={CHART_TITLE.EXAMPLE_RADAR} />
       </Menu>
     )
   }

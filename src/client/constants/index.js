@@ -24,7 +24,8 @@ export const CHART_TITLE = {
   TIME_SOC: 'Battery state (%)',
   TIME_ENERGY_SPEED: 'Energy (kWh) & Speed (km/h) over time',
   TIME_SOC_SPEED: 'Battery state & Speed (km/h) over time',
-  ENERGY_PASSENGERS: 'Energy spent depending on passengers'
+  EXAMPLE_RADAR: 'Example Energy (kWh) per bus',
+  EXAMPLE_BUBBLE: 'Example Number of passengers',
 }
 
 export const CHART_TYPE = {
@@ -32,7 +33,8 @@ export const CHART_TYPE = {
   BAR: 'Bar',
   AREA: 'Area',
   COMPOSED: 'Composed',
-  RADIAL: 'Radial',
+  RADAR: 'Radar',
+  BUBBLE: 'Bubble',
   PIE: 'Pie'
 }
 

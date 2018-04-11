@@ -1,7 +1,7 @@
 
 /**
  * @file socket.io
- * @author Enrique Tamames
+ * @author Enrique Tamames Sobrino
  * @module lib/socket
  * @version 0.0.1
  */
