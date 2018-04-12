@@ -7,11 +7,10 @@
  */
 
 import React from 'react'
-import renderer from 'react-test-renderer';
 import { App } from '../components/App'
 import Sidebar from '../components/Sidebar'
 import Map from '../components/Map'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { Server } from 'mock-socket'
 import sinon from 'sinon'
 import { vehicle, currentCoordinate } from '../__mocks__/mockupData'

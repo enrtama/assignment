@@ -7,7 +7,6 @@
  */
 
 import React from 'react'
-import renderer from 'react-test-renderer';
 import Sidebar from '../components/Sidebar'
 import { slide as Menu } from 'react-burger-menu'
 import Chart from '../components/Chart'

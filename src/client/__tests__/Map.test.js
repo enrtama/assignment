@@ -7,10 +7,9 @@
  */
 
 import React from 'react'
-import renderer from 'react-test-renderer';
 import VehicleMap from '../components/Map'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { vehicle, currentCoordinate } from '../__mocks__/mockupData'
 
 

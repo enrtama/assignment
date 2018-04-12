@@ -7,7 +7,6 @@
  */
 
 import React from 'react'
-import renderer from 'react-test-renderer';
 import Chart from '../components/Chart'
 import { LineChart, AreaChart } from 'recharts'
 import sinon from 'sinon'
