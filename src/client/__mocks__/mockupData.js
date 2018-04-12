@@ -1,7 +1,7 @@
 //
 // Mockup data
 //
-//
+
 export const vehicle = [{
   energy: null,
   gps: ["52.09136199951172", "5.122323513031006"],

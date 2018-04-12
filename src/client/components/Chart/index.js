@@ -89,6 +89,7 @@ export default class Chart extends React.Component<Props,State> {
 
     if (vehicle) {
       let newData = {}
+      // Add data formatted for chart
       newData[parameters[0]] = parameters[0] === PARAMETERS.TIME ? vehicle.time : vehicle[parameters[0]]
       newData[parameters[1]] = vehicle[parameters[1]]
       parameters[2] !== PARAMETERS.NO_PARAM && (newData[parameters[2]] = vehicle[parameters[2]] || 0)
@@ -150,8 +151,12 @@ export default class Chart extends React.Component<Props,State> {
     const param1 = parameters[1] || ''
     const param2 = parameters[2]
 
-    const domain = this.parseDomain();
-    const range = [50, 300];
+    let domain = null
+    let range = null
+    if (chartType === CHART_TYPE.BUBBLE) {
+      domain = this.parseDomain();
+      range = [50, 300];
+    }
 
     switch (chartType) {
       case CHART_TYPE.LINE:
@@ -196,13 +201,22 @@ export default class Chart extends React.Component<Props,State> {
                    <Tooltip labelFormatter={this.toPercent}/>
                  </PieChart>
         case CHART_TYPE.BUBBLE:
-        return <ScatterChart width={800} height={60} margin={{top: 10, right: 0, bottom: 0, left: 0}}>
-                <XAxis type="category" dataKey="hour" interval={0} tick={{ fontSize: 0 }} tickLine={{ transform: 'translate(0, -6)' }} />
-                <YAxis type="number" dataKey="index" name="sunday" height={10} width={80} tick={false} tickLine={false} axisLine={false} label={{ value: 'Sunday', position: 'insideRight' }}/>
-                <ZAxis type="number" dataKey="value" domain={domain} range={range} />
-                <Tooltip cursor={{strokeDasharray: '3 3'}} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltipBubble} />
-                <Scatter data={dataBubble} fill='#8884d8'/>
-              </ScatterChart>
+        return <div>
+                 <ScatterChart width={800} height={60} margin={{top: 10, right: 0, bottom: 0, left: 0}}>
+                   <XAxis type="category" dataKey="hour" interval={0} tick={{ fontSize: 0 }} tickLine={{ transform: 'translate(0, -6)' }} />
+                   <YAxis type="number" dataKey="index" name="sunday" height={10} width={80} tick={false} tickLine={false} axisLine={false} label={{ value: 'Sunday', position: 'insideRight' }}/>
+                   <ZAxis type="number" dataKey="value" domain={domain} range={range} />
+                   <Tooltip cursor={{strokeDasharray: '3 3'}} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltipBubble} />
+                   <Scatter data={dataBubble} fill='#8884d8'/>
+                 </ScatterChart>
+                 <ScatterChart width={800} height={60} margin={{top: 10, right: 0, bottom: 0, left: 0}}>
+                   <XAxis type="category" dataKey="hour" name="hour" interval={0} tickLine={{ transform: 'translate(0, -6)' }} />
+                   <YAxis type="number" dataKey="index" height={10} width={80} tick={false} tickLine={false} axisLine={false} label={{ value: 'Saturday', position: 'insideRight' }}/>
+                   <ZAxis type="number" dataKey="value" domain={domain} range={range} />
+                   <Tooltip cursor={{strokeDasharray: '3 3'}} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltipBubble} />
+                   <Scatter data={dataBubble} fill='#8884d8'/>
+                 </ScatterChart>
+               </div>
       default:
         // No action
     }
